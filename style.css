@@ -51,6 +51,14 @@ h1 {
     float: left;
     border-radius: 3px;
     background: rgba(238, 228, 218, 0.35);
+    border-radius: 3px;
+    background: #eee4da;
+    text-align: center;
+    font-weight: bold;
+    z-index: 10;
+    font-size: 55px;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 18px;
 }
 
 .grid-cell:last-child {
