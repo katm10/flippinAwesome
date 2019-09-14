@@ -1,6 +1,6 @@
-$('.start-button').on("click", function() {
+$(".start-button").on("click", function() {
   startGame();
-})
+});
 
 function fillTiles(numFlip, textArr) {
   const tileMap = {};
@@ -20,9 +20,6 @@ function playRound(arr) {
   fillTiles(numFlip, arr);
 
   $(".grid-cell").css("background", "#cbf7f4");
-
-  var currentTile = 0;
-
 }
 
 function startGame() {
@@ -35,15 +32,14 @@ function startGame() {
   arrOfArrs[0] = [];
 
   for (var i = 0; i < textArr.length; i += 1) {
-    if (i % 16 == 0 && i !=0) {
+    if (i % 16 == 0 && i != 0) {
       arrCounter += 1;
-      arrOfArrs[arrCounter] = []
+      arrOfArrs[arrCounter] = [];
     }
     arrOfArrs[arrCounter].push(textArr[i]);
   }
-  
-  for(var i = 0; i < arrOfArrs.length; i++){
-      playRound(arrOfArrs[i])
-  }
 
+  for (var i = 0; i < arrOfArrs.length; i++) {
+    playRound(arrOfArrs[i]);
+  }
 }
