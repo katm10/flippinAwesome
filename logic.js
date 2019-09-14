@@ -1,3 +1,7 @@
+$('.start-button').on("click", function() {
+  startGame();
+})
+
 function fillTiles(numFlip, textArr) {
   var usedTiles = [];
   for (var i = 0; i < numFlip; i += 1) {
