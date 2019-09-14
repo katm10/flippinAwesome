@@ -3,35 +3,25 @@ $('.start-button').on("click", function() {
 })
 
 function fillTiles(numFlip, textArr) {
-  var usedTiles = [];
+  const tileMap = {};
   for (var i = 0; i < numFlip; i += 1) {
     var random;
     do {
       random = Math.floor(Math.random() * 16);
-    } while (usedTiles.includes(random));
-    usedTiles.push(random);
+    } while (Object.keys(tileMap).includes(random));
+    tileMap[random] = textArr[i];
     $("#button-" + random).text(textArr[i]);
   }
+  console.log(tileMap);
 }
 
 function playRound(arr) {
   numFlip = 4;
   fillTiles(numFlip, arr);
+
   $(".grid-cell").css("background", "#cbf7f4");
 
   var currentTile = 0;
-  while (currentTile < arr.length) {
-    $(".grid-cell").on("click", function() {
-      if ($(this.textarea).val() == arr[currentTile]) {
-        $(this).css("background", "#cdf7dc");
-        currentTile += 1;
-        // TODO: points
-      }
-      else{
-        // TODO: punish
-      }
-    });
-  }
 
 }
 
@@ -53,7 +43,6 @@ function startGame() {
   }
   
   for(var i = 0; i < arrOfArrs.length; i++){
-      console.log(arrOfArrs[i])
       playRound(arrOfArrs[i])
   }
 
