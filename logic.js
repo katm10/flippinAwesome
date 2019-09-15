@@ -7,10 +7,12 @@ let startTime;
 let endTime;
 let points = 0;
 let strikes = 3;
+let wonGame = false;
 
 
 $(".start-button").on("click", function() {
   if (hiddenText || $("textarea").val()) {
+    resetEverything();
     startGame();
   }  
 });
@@ -25,10 +27,11 @@ function resetEverything() {
   endTime;
   points = 0;
   strikes = 3;
+  wonGame = false;
 
   makeEverythingDisappear();
   $('.flip-card-inner').removeClass("flipped")
-  $(".point-total").text("Points: 0");
+  $(".point-total").html("Points: 0 &emsp; Strikes: 3");
 
 }
 
@@ -109,17 +112,16 @@ $(".grid-cell").click(function() {
     } else if (wordIndex == numOfTiles - 1) {
       const timeDifference = endTime - startTime;
       points += Math.round((100 * numOfTiles) / Math.log10(timeDifference));
-      $(".point-total").text("Points: " + points);
+      $(".point-total").html("Points: "+points+" &emsp; Strikes: "+strikes);
       if (numOfTiles == allArrays[arrayIndex].length) {
         arrayIndex += 1;
         showCorrectTile(currentTile);
         if (arrayIndex == allArrays.length) {
-          points += 500;
           $(".modal-text").html(
             "<p>You won with a grand total of <b>" + points + "</b> points!</p>"
           );
           $(".modal").css("display", "block");
-          resetEverything();
+          wonGame = True;
           return;
         }
         numOfTiles = 3;
@@ -134,21 +136,29 @@ $(".grid-cell").click(function() {
   } else {
     showCorrectTile(currentTile);
     strikes -= 1;
+    $(".point-total").html(
+      "Points: "+points+" &emsp; Strikes: "+strikes
+    );
     const display =
       strikes != 0
         ? "<p>Oh no! You lost a strike. You have <b>" +
           strikes +
-          "</b> strikes left.</p>"
+          "</b> strike(s) left.</p>"
         : "<p>Oh no! You are out of strikes. Game over. You ended with <b>" +
           points +
           "</b>!</p>";
     $(".modal-text").html(display);
     $(".modal").css("display", "block");
-    if (strikes == 0) {
-      resetEverything();
-    } else {
-      fillTiles(numOfTiles, allArrays[arrayIndex]);
-      wordIndex = 0;
-    }
   }
 });
+
+
+$('.close').click(function() {
+  $('.modal').css("display", "none");
+  if (strikes == 0 || wonGame) {
+    resetEverything();
+  } else {
+    fillTiles(numOfTiles, allArrays[arrayIndex]);
+    wordIndex = 0;
+  }
+})
