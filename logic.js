@@ -35,7 +35,7 @@ function startGame() {
   wordIndex = 0;
   numOfTiles = 4;
 
-  const textArr = text.split(" ");
+  const textArr = text.replace(/[\n\t]+/g, " ").split(" ");
   var arrCounter = 0;
   allArrays = Array(Math.ceil(textArr.length / 9));
   allArrays[0] = [];
