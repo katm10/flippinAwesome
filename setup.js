@@ -9,6 +9,7 @@ for (var i = 0; i < height; i++) {
 	$(".grid-container").append("<div class='grid-row'></div>");
 	for (var j = 0; j < width; j++) {
 		$(".grid-container .grid-row:last-child").append("<div class='grid-cell' id='"+(i*height + j)+"'></div>")
+		$(".grid-cell#" + (i*height + j)).append("<div class='flip-card-inner'><div class='flip-card-front'></div><div class='flip-card-back'></div></div>")
 	}
 }
 

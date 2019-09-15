@@ -9,7 +9,10 @@ let points = 0;
 let strikes = 3;
 
 $(".start-button").on("click", function() {
-  startGame();
+  if (hiddenText || $("textarea").val()) {
+    startGame();
+  }
+  
 });
 
 function resetEverything() {
@@ -24,12 +27,14 @@ function resetEverything() {
   strikes = 3;
 
   makeEverythingDisappear();
+  $('.flip-card-inner').removeClass("flipped")
   $(".point-total").text("Points: 0");
 
 }
 
 function fillTiles(numFlip, textArr) {
   makeEverythingDisappear();
+  $('.flip-card-inner').removeClass("flipped")
   tileMap = {};
   for (var i = 0; i < numFlip; i += 1) {
     var random;
@@ -37,7 +42,7 @@ function fillTiles(numFlip, textArr) {
       random = Math.floor(Math.random() * 9);
     } while (Object.keys(tileMap).includes(random.toString()));
     tileMap[random] = textArr[i];
-    $("#" + random).text(textArr[i]);
+    $("#" + random + " .flip-card-front").html(textArr[i]);
     startTime = Date.now();
   }
 }
@@ -51,6 +56,9 @@ function startGame() {
   text = $(".word-container")
     .find("textarea")
     .val();
+  if (!text) {
+    text = hiddenText;
+  }
   arrayIndex = 0;
   wordIndex = 0;
   numOfTiles = 4;
@@ -72,22 +80,31 @@ function startGame() {
 }
 
 function makeEverythingDisappear() {
-  $(".grid-cell").text("");
-  $(".grid-cell").css("background", "#add9f4");
+  $(".flip-card-front").text("");
+}
+
+function flipAllExcept(tileNumber) {
+  for (var i = 0; i < 9; i++) {
+    if (i != tileNumber) {
+      $("#" + i + " .flip-card-inner").addClass("flipped")
+    }
+  }
 
 }
+
 
 function showCorrectTile(tileNumber) {
-  $("#" + tileNumber).text(tileMap[tileNumber]);
-  $("#" + tileNumber).css("background", "#8BDDCC");
+  $("#" + tileNumber + " .flip-card-front").html(tileMap[tileNumber]);
+  $("#" + tileNumber + " .flip-card-inner").removeClass("flipped")
 }
 
+
+
 $(".grid-cell").click(function() {
+  const currentTile = $(this).attr("id");
   if (tileMap[$(this).attr("id")] == allArrays[arrayIndex][wordIndex]) {
-    const currentTile = $(this).attr("id");
     if (wordIndex == 0) {
-      // makeEverythingDisappear();
-      showCorrectTile(currentTile);
+      flipAllExcept(currentTile);
       endTime = Date.now();
     } else if (wordIndex == numOfTiles - 1) {
       const timeDifference = endTime - startTime;
@@ -115,6 +132,7 @@ $(".grid-cell").click(function() {
     }
     wordIndex += 1;
   } else {
+    showCorrectTile(currentTile);
     strikes -= 1;
     const display =
       strikes != 0
@@ -130,6 +148,7 @@ $(".grid-cell").click(function() {
       resetEverything();
     } else {
       fillTiles(numOfTiles, allArrays[arrayIndex]);
+      wordIndex = 0;
     }
   }
 });
