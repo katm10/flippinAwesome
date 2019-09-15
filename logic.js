@@ -3,6 +3,9 @@ let wordIndex = 0;
 let allArrays = [];
 let arrayIndex = 0;
 let numOfTiles = 4;
+let startTime;
+let endTime;
+let points = 0;
 
 $(".start-button").on("click", function() {
   startGame();
@@ -19,6 +22,7 @@ function fillTiles(numFlip, textArr) {
     } while (Object.keys(tileMap).includes(random.toString()));
     tileMap[random] = textArr[i];
     $("#" + random).text(textArr[i]);
+    startTime = Date.now();
   }
 }
 
@@ -66,22 +70,20 @@ $(".grid-cell").click(function() {
     if (wordIndex == 0) {
       // makeEverythingDisappear();
       showCorrectTile(currentTile);
+      endTime = Date.now();
     } else if (wordIndex == numOfTiles - 1) {
-      console.log(numOfTiles)
-      console.log(allArrays[arrayIndex].length)
+      const timeDifference = endTime - startTime;
+      points += Math.round((100 * numOfTiles) / Math.log10(timeDifference));
+      $(".point-total").text("Points: " + points);
       if (numOfTiles == allArrays[arrayIndex].length) {
         arrayIndex += 1;
         numOfTiles = 3;
-        console.log(allArrays[arrayIndex])
         if (arrayIndex == allArrays.length) {
           // you won
         }
       }
-      console.log('before show current')
-      console.log('arrayindex', arrayIndex)
       showCorrectTile(currentTile);
       numOfTiles += 1;
-      console.log('before fill tiles')
       fillTiles(numOfTiles, allArrays[arrayIndex]);
       wordIndex = -1;
     } else {
@@ -90,5 +92,3 @@ $(".grid-cell").click(function() {
     wordIndex += 1;
   }
 });
-
-
