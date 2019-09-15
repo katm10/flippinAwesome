@@ -7,6 +7,7 @@ let startTime;
 let endTime;
 let points = 0;
 let strikes = 3;
+let wonGame = false;
 
 $(".start-button").on("click", function() {
   if (hiddenText || $("textarea").val()) {
@@ -25,6 +26,7 @@ function resetEverything() {
   endTime;
   points = 0;
   strikes = 3;
+  wonGame = false;
 
   makeEverythingDisappear();
   $('.flip-card-inner').removeClass("flipped")
@@ -114,12 +116,11 @@ $(".grid-cell").click(function() {
         arrayIndex += 1;
         showCorrectTile(currentTile);
         if (arrayIndex == allArrays.length) {
-          points += 500;
           $(".modal-text").html(
             "<p>You won with a grand total of <b>" + points + "</b> points!</p>"
           );
           $(".modal").css("display", "block");
-          resetEverything();
+          wonGame = True;
           return;
         }
         numOfTiles = 3;
@@ -153,7 +154,7 @@ $(".grid-cell").click(function() {
 
 $('.close').click(function() {
   $('.modal').css("display", "none");
-  if (strikes == 0) {
+  if (strikes == 0 || wonGame) {
     resetEverything();
   } else {
     fillTiles(numOfTiles, allArrays[arrayIndex]);
