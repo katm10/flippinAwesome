@@ -11,8 +11,7 @@ let strikes = 3;
 $(".start-button").on("click", function() {
   if (hiddenText || $("textarea").val()) {
     startGame();
-  }
-  
+  }  
 });
 
 function resetEverything() {
@@ -63,7 +62,7 @@ function startGame() {
   wordIndex = 0;
   numOfTiles = 4;
 
-  const textArr = text.replace(/[\n\t]+/g, " ").split(" ");
+  const textArr = text.trim().replace(/[\n\t\s]+/g, " ").split(" ");
   var arrCounter = 0;
   allArrays = Array(Math.ceil(textArr.length / 9));
   allArrays[0] = [];
