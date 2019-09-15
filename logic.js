@@ -10,6 +10,7 @@ let strikes = 3;
 
 $(".start-button").on("click", function() {
   if (hiddenText || $("textarea").val()) {
+    resetEverything();
     startGame();
   }  
 });
@@ -27,7 +28,7 @@ function resetEverything() {
 
   makeEverythingDisappear();
   $('.flip-card-inner').removeClass("flipped")
-  $(".point-total").text("Points: 0");
+  $(".point-total").html("Points: 0 &emsp; Strikes: 3");
 
 }
 
@@ -108,7 +109,7 @@ $(".grid-cell").click(function() {
     } else if (wordIndex == numOfTiles - 1) {
       const timeDifference = endTime - startTime;
       points += Math.round((100 * numOfTiles) / Math.log10(timeDifference));
-      $(".point-total").text("Points: " + points);
+      $(".point-total").html("Points: "+points+" &emsp; Strikes: "+strikes);
       if (numOfTiles == allArrays[arrayIndex].length) {
         arrayIndex += 1;
         showCorrectTile(currentTile);
@@ -133,11 +134,14 @@ $(".grid-cell").click(function() {
   } else {
     showCorrectTile(currentTile);
     strikes -= 1;
+    $(".point-total").html(
+      "Points: "+points+" &emsp; Strikes: "+strikes
+    );
     const display =
       strikes != 0
         ? "<p>Oh no! You lost a strike. You have <b>" +
           strikes +
-          "</b> strikes left.</p>"
+          "</b> strike(s) left.</p>"
         : "<p>Oh no! You are out of strikes. Game over. You ended with <b>" +
           points +
           "</b>!</p>";
