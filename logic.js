@@ -144,11 +144,16 @@ $(".grid-cell").click(function() {
           "</b>!</p>";
     $(".modal-text").html(display);
     $(".modal").css("display", "block");
-    if (strikes == 0) {
-      resetEverything();
-    } else {
-      fillTiles(numOfTiles, allArrays[arrayIndex]);
-      wordIndex = 0;
-    }
   }
 });
+
+
+$('.close').click(function() {
+  $('.modal').css("display", "none");
+  if (strikes == 0) {
+    resetEverything();
+  } else {
+    fillTiles(numOfTiles, allArrays[arrayIndex]);
+    wordIndex = 0;
+  }
+})
