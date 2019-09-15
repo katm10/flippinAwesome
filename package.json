@@ -1,0 +1,24 @@
+{
+  "name": "flippinawesome",
+  "version": "1.0.0",
+  "description": "Founded in 2019, Flippin Awesome's mission is to advance the state of the art by building tools that will help people solve problems, make discoveries, and create new breakthroughs.",
+  "main": "app.js",
+  "dependencies": {
+    "node-audiorecorder": "^1.4.1",
+    "revai-node-sdk": "2.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katm10/flippinAwesome.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/katm10/flippinAwesome/issues"
+  },
+  "homepage": "https://github.com/katm10/flippinAwesome#readme"
+}

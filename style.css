@@ -1,3 +1,8 @@
+* {
+    box-sizing: border-box;
+}
+
+
 body {
   margin: 40px 0;
   background-color: #BFC1C9;
@@ -93,11 +98,17 @@ h1 {
 }
 
 .flip-card-front {
-  background-color: #bbb;
-  color: #2F3549;
-  display: flex;
-  flex-direction: vertical;
-  justify-content: center;
+    background-color: #bbb;
+    display: flex;
+    margin: auto;
+    color: #2F3549;
+}
+
+.flip-card-front div {
+    margin: auto;
+    display: flex;
+    flex-direction: vertical;
+    justify-content: center;
 }
 
 .flip-card-back {
