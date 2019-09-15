@@ -73,13 +73,13 @@ function startGame() {
 
 function makeEverythingDisappear() {
   $(".grid-cell").text("");
-  $(".grid-cell").css("background", "#cbf7f4");
+  $(".grid-cell").css("background", "#add9f4");
 
 }
 
 function showCorrectTile(tileNumber) {
   $("#" + tileNumber).text(tileMap[tileNumber]);
-  $("#" + tileNumber).css("background", "green");
+  $("#" + tileNumber).css("background", "#8BDDCC");
 }
 
 $(".grid-cell").click(function() {
