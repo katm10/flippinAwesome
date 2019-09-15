@@ -158,7 +158,7 @@ $('.close').click(function() {
   if (strikes == 0 || wonGame) {
     resetEverything();
   } else {
-    fillTiles(numOfTiles, allArrays[arrayIndex]);
+    $('.flip-card-inner').removeClass("flipped")
     wordIndex = 0;
   }
 })
