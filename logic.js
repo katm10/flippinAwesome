@@ -6,14 +6,30 @@ let numOfTiles = 4;
 let startTime;
 let endTime;
 let points = 0;
+let strikes = 3;
 
 $(".start-button").on("click", function() {
   startGame();
 });
 
+function resetEverything() {
+  tileMap = {};
+  wordIndex = 0;
+  allArrays = [];
+  arrayIndex = 0;
+  numOfTiles = 4;
+  startTime;
+  endTime;
+  points = 0;
+  strikes = 3;
+
+  makeEverythingDisappear();
+  $(".point-total").text("Points: 0");
+
+}
+
 function fillTiles(numFlip, textArr) {
   makeEverythingDisappear();
-  $(".grid-cell").css("background", "#cbf7f4");
   tileMap = {};
   for (var i = 0; i < numFlip; i += 1) {
     var random;
@@ -57,6 +73,8 @@ function startGame() {
 
 function makeEverythingDisappear() {
   $(".grid-cell").text("");
+  $(".grid-cell").css("background", "#cbf7f4");
+
 }
 
 function showCorrectTile(tileNumber) {
@@ -77,12 +95,18 @@ $(".grid-cell").click(function() {
       $(".point-total").text("Points: " + points);
       if (numOfTiles == allArrays[arrayIndex].length) {
         arrayIndex += 1;
-        numOfTiles = 3;
+        showCorrectTile(currentTile);
         if (arrayIndex == allArrays.length) {
-          // you won
+          points += 500;
+          $(".modal-text").html(
+            "<p>You won with a grand total of <b>" + points + "</b> points!</p>"
+          );
+          $(".modal").css("display", "block");
+          resetEverything();
+          return;
         }
+        numOfTiles = 3;
       }
-      showCorrectTile(currentTile);
       numOfTiles += 1;
       fillTiles(numOfTiles, allArrays[arrayIndex]);
       wordIndex = -1;
@@ -90,5 +114,22 @@ $(".grid-cell").click(function() {
       showCorrectTile(currentTile);
     }
     wordIndex += 1;
+  } else {
+    strikes -= 1;
+    const display =
+      strikes != 0
+        ? "<p>Oh no! You lost a strike. You have <b>" +
+          strikes +
+          "</b> strikes left.</p>"
+        : "<p>Oh no! You are out of strikes. Game over. You ended with <b>" +
+          points +
+          "</b>!</p>";
+    $(".modal-text").html(display);
+    $(".modal").css("display", "block");
+    if (strikes == 0) {
+      resetEverything();
+    } else {
+      fillTiles(numOfTiles, allArrays[arrayIndex]);
+    }
   }
 });
