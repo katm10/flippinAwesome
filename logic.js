@@ -8,6 +8,7 @@ let endTime;
 let points = 0;
 let strikes = 3;
 
+
 $(".start-button").on("click", function() {
   if (hiddenText || $("textarea").val()) {
     startGame();
@@ -41,7 +42,7 @@ function fillTiles(numFlip, textArr) {
       random = Math.floor(Math.random() * 9);
     } while (Object.keys(tileMap).includes(random.toString()));
     tileMap[random] = textArr[i];
-    $("#" + random + " .flip-card-front").html(textArr[i]);
+    $("#" + random + " .flip-card-front").html("<div>" + textArr[i] + "</div>");
     startTime = Date.now();
   }
 }
@@ -79,7 +80,7 @@ function startGame() {
 }
 
 function makeEverythingDisappear() {
-  $(".flip-card-front").text("");
+  $(".flip-card-front").html("");
 }
 
 function flipAllExcept(tileNumber) {
@@ -93,7 +94,7 @@ function flipAllExcept(tileNumber) {
 
 
 function showCorrectTile(tileNumber) {
-  $("#" + tileNumber + " .flip-card-front").html(tileMap[tileNumber]);
+//  $("#" + tileNumber + " .flip-card-front").html(tileMap[tileNumber]);
   $("#" + tileNumber + " .flip-card-inner").removeClass("flipped")
 }
 
