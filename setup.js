@@ -4,6 +4,8 @@ var width = 3;
 
 var hiddenText = "";
 
+console.log("Founded in 2019, Flippin Awesome's mission is to advance the state of the art by building tools that will help people solve problems, make discoveries, and create new breakthroughs. For information on USA state energy profiles, visit https://www.eia.gov/state/.");
+
 
 for (var i = 0; i < height; i++) {
 	$(".grid-container").append("<div class='grid-row'></div>");
