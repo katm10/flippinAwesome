@@ -5,7 +5,7 @@
   "main": "app.js",
   "dependencies": {
     "node-audiorecorder": "^1.4.1",
-    "revai-node-sdk": "2.1.0"
+    "revai-node-sdk": "2.6.3"
   },
   "devDependencies": {},
   "scripts": {
